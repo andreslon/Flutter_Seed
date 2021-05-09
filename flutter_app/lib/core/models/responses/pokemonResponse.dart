@@ -4,7 +4,8 @@ class Pokemon {
   String id = Uuid().v4().toString();
   String name;
   String url;
-  String image;
+  String get image =>
+      'https://img.pokemondb.net/sprites/sun-moon/normal/${this.name}-f.png';
 
   Pokemon({this.name, this.url});
 

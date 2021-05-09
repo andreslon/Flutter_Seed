@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/core/models/responses/pokeApiResponse.dart';
 import 'package:flutter_app/core/models/responses/pokemonResponse.dart';
+import 'package:flutter_app/core/services/pokemonService.dart';
 import 'package:flutter_app/widgets/pokemonTile.dart';
+
+import 'package:http/http.dart' as http;
 
 class PokemonList extends StatefulWidget {
   PokemonList({Key key}) : super(key: key);
@@ -10,10 +16,20 @@ class PokemonList extends StatefulWidget {
 }
 
 class _PokemonListState extends State<PokemonList> {
-  List<Pokemon> pokemons = [
-    Pokemon(name: 'Juan', url: 'Rojas'),
-    Pokemon(name: 'Andres', url: 'sdadas')
-  ];
+  List<Pokemon> pokemons = [];
+  @override
+  void initState() {
+    super.initState();
+    getPokemons(context).then((value) => {
+          if (value != null)
+            {
+              this.setState(() {
+                pokemons = value.results;
+              })
+            }
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
