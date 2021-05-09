@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/pages/home.dart';
+import 'package:flutter_app/widgets/alert.dart';
 
 class Login extends StatefulWidget {
   Login({Key key}) : super(key: key);
@@ -60,6 +61,8 @@ List<Widget> loginFields(context) {
           onPressed: () {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => Home()));
+
+            // openAlert(context, "my title", 'This is a message');
           },
           child: Row(
             mainAxisSize: MainAxisSize.max,
