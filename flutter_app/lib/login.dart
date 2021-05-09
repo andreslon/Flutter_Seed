@@ -31,19 +31,22 @@ Widget loginBody() {
 
 List<Widget> loginFields() {
   return [
-    Text(
-      'Sign In',
-      style: TextStyle(color: Colors.white, fontSize: 30),
+    Container(
+      margin: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+      child: Text(
+        'Sign In',
+        style: TextStyle(color: Colors.white, fontSize: 30),
+      ),
     ),
     Container(
-      padding: EdgeInsets.all(15),
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: TextField(
         decoration: InputDecoration(
             hintText: 'User', fillColor: Colors.white, filled: true),
       ),
     ),
     Container(
-      padding: EdgeInsets.all(15),
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: TextField(
         obscureText: true,
         decoration: InputDecoration(
@@ -51,7 +54,7 @@ List<Widget> loginFields() {
       ),
     ),
     Container(
-      padding: EdgeInsets.all(15),
+      margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       child: ElevatedButton(
           onPressed: () {},
           child: Row(
