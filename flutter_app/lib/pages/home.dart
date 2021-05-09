@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/pokemonList.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -10,12 +11,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Scaffold(
-            appBar: AppBar(
-              title: Text('Ny App'),
-            ),
-            body: homeBody(context)));
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Ny App'),
+        ),
+        body: homeBody(context));
   }
 }
 
@@ -47,6 +47,21 @@ Widget homeBody(context) {
                     width: 5,
                   ),
                   Text('hola button')
+                ],
+              )),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PokemonList()));
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.ad_units),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text('View Pokemons')
                 ],
               ))
         ],
