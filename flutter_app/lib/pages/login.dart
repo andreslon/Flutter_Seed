@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app/pages/home.dart';
 
 class Login extends StatefulWidget {
   Login({Key key}) : super(key: key);
@@ -11,11 +12,11 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    return Container(child: Scaffold(body: loginBody()));
+    return Container(child: Scaffold(body: loginBody(context)));
   }
 }
 
-Widget loginBody() {
+Widget loginBody(context) {
   return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -25,11 +26,11 @@ Widget loginBody() {
       child: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: loginFields(),
+        children: loginFields(context),
       )));
 }
 
-List<Widget> loginFields() {
+List<Widget> loginFields(context) {
   return [
     Container(
       margin: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
@@ -56,7 +57,10 @@ List<Widget> loginFields() {
     Container(
       margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Home()));
+          },
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
