@@ -20,59 +20,55 @@ class _PokemonListState extends State<PokemonList> {
   @override
   void initState() {
     super.initState();
+
     pokemons = getPokemons(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Pokemons'),
-      ),
-      body: FutureBuilder(
-        future: pokemons,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data.length,
-              itemBuilder: (context, index) {
-                final item = snapshot.data[index];
-                return Dismissible(
-                  key: Key(item.id),
-                  background: Container(
-                    alignment: AlignmentDirectional.centerEnd,
-                    color: Colors.red,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Icon(
-                        Icons.delete,
-                        color: Colors.white,
-                      ),
+    return FutureBuilder(
+      future: pokemons,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+            itemCount: snapshot.data.length,
+            itemBuilder: (context, index) {
+              final item = snapshot.data[index];
+              return Dismissible(
+                key: Key(item.id),
+                background: Container(
+                  alignment: AlignmentDirectional.centerEnd,
+                  color: Colors.red,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white,
                     ),
                   ),
-                  onDismissed: (direction) {
-                    if (snapshot.data.contains(item)) {
-                      setState(() {
-                        snapshot.data.remove(item);
-                      });
-                    }
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text("$item deleted")));
-                  },
-                  child: pokemonTile(item),
-                );
-              },
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error Loading Pokemons'),
-            );
-          }
-          return Center(
-            child: CircularProgressIndicator(),
+                ),
+                onDismissed: (direction) {
+                  if (snapshot.data.contains(item)) {
+                    setState(() {
+                      snapshot.data.remove(item);
+                    });
+                  }
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text("$item deleted")));
+                },
+                child: pokemonTile(item),
+              );
+            },
           );
-        },
-      ),
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('Error Loading Pokemons'),
+          );
+        }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }

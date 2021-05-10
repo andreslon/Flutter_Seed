@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/dragonballList.dart';
 import 'package:flutter_app/pages/pokemonList.dart';
 
 class Home extends StatefulWidget {
@@ -9,88 +10,29 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int currentPage = 0;
+  BuildContext context;
+  List<Widget> pages = [DragonBallList(), PokemonList()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Ny App'),
-        ),
-        body: homeBody(context));
-  }
-}
-
-Widget homeBody(context) {
-  return ListView(
-    children: [
-      Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            color: Color.alphaBlend(Colors.amber, Colors.red),
-            child: Text('Container 1'),
-          ),
-          Text('data 1'),
-          Text('data 2'),
-          ElevatedButton(
-              onPressed: () {
-                var t = DateTime.now();
-                print('clicked' + t.toString());
-              },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.access_time),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text('hola button')
-                ],
-              )),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PokemonList()));
-              },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.ad_units),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text('View Pokemons')
-                ],
-              ))
+      appBar: AppBar(
+        title: Text('Ny App'),
+      ),
+      body: pages[currentPage], //homeBody(context),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentPage,
+        onTap: (index) {
+          print(index);
+          setState(() {
+            currentPage = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Pokemons')
         ],
       ),
-      Container(
-        padding: EdgeInsets.all(20),
-        child: Image.network(
-            'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/05/dia-goku.jpg'),
-      ),
-      Container(
-        padding: EdgeInsets.all(20),
-        child: Image.network(
-            'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/05/dia-goku.jpg'),
-      ),
-      Container(
-        padding: EdgeInsets.all(20),
-        child: Image.network(
-            'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/05/dia-goku.jpg'),
-      ),
-      Container(
-        padding: EdgeInsets.all(20),
-        child: Image.network(
-            'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/05/dia-goku.jpg'),
-      ),
-      Container(
-        padding: EdgeInsets.all(20),
-        child: Image.network(
-            'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/05/dia-goku.jpg'),
-      ),
-    ],
-  );
+    );
+  }
 }
