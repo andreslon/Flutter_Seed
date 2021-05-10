@@ -17,11 +17,11 @@ class PokemonList extends StatefulWidget {
 
 class _PokemonListState extends State<PokemonList> {
   Future<List<Pokemon>> pokemons;
+  PokemonService pokemonService = new PokemonService();
   @override
   void initState() {
     super.initState();
-
-    pokemons = getPokemons(context);
+    pokemons = pokemonService.getPokemons(context);
   }
 
   @override
