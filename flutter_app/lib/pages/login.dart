@@ -32,6 +32,8 @@ Widget loginBody(context) {
 }
 
 List<Widget> loginFields(context) {
+  TextEditingController user = TextEditingController(text: '');
+  TextEditingController password = TextEditingController(text: '');
   return [
     Container(
       margin: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
@@ -43,6 +45,7 @@ List<Widget> loginFields(context) {
     Container(
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: TextField(
+        controller: user,
         decoration: InputDecoration(
             hintText: 'User', fillColor: Colors.white, filled: true),
       ),
@@ -50,6 +53,7 @@ List<Widget> loginFields(context) {
     Container(
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: TextField(
+        controller: password,
         obscureText: true,
         decoration: InputDecoration(
             hintText: 'Password', fillColor: Colors.white, filled: true),
@@ -59,10 +63,12 @@ List<Widget> loginFields(context) {
       margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       child: ElevatedButton(
           onPressed: () {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => Home()));
-
-            // openAlert(context, "my title", 'This is a message');
+            if (user.text != "" && password.text != "") {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => Home()));
+            } else {
+              openAlert(context, "Validation", 'Please fill information');
+            }
           },
           child: Row(
             mainAxisSize: MainAxisSize.max,
